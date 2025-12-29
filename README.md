@@ -54,7 +54,8 @@ TinyImageNet-RAG-Multimodal-System/
 ├── indexer.py              # Script untuk membuat index FAISS dari Dataset
 ├── download_data.py        # Script download dataset otomatis
 ├── Dataset/                # Folder penyimpanan gambar TinyImageNet
-└── vector_db/              # Folder penyimpanan hasil indexing (FAISS .bin)
+└── vector_db/              # Folder penyimpanan hasil indexing (FAISS .bin, .json)
+
 
 
 
