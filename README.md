@@ -1,130 +1,242 @@
-# TinyImageNet RAG Multimodal System
+# 🖼️ TinyImageNet RAG Multimodal System
 
-Sistem **Retrieval-Augmented Generation (RAG) Multimodal** yang dibangun untuk melakukan pencarian dan deskripsi citra secara cerdas menggunakan dataset **TinyImageNet**.
+Sistem **Retrieval-Augmented Generation (RAG) Multimodal** untuk pencarian dan deskripsi citra secara cerdas menggunakan dataset **TinyImageNet-200**.
 
-Sistem ini menggabungkan kekuatan **CLIP** untuk pencarian visual (retrieval) dan **Qwen2-VL** (Vision-Language Model) untuk menghasilkan deskripsi tekstual yang akurat berdasarkan konteks gambar yang ditemukan.
+Sistem ini mengintegrasikan:
 
+* **CLIP** untuk *visual & text retrieval* berbasis embedding,
+* **FAISS** sebagai *vector database* berperforma tinggi,
+* **Qwen2-VL** (*Vision-Language Model*) untuk menghasilkan deskripsi gambar yang kontekstual dan akurat.
 
-dataset <img width="1639" height="912" alt="image" src="https://github.com/user-attachments/assets/e984b1a5-b043-4d63-8047-552a5c3d2f92" />
+Pendekatan RAG memungkinkan model generatif menerima **konteks hasil retrieval** (label/metadata) sehingga kualitas deskripsi menjadi lebih presisi dan relevan.
 
-metodology & pipeline RAG<img width="1658" height="921" alt="image" src="https://github.com/user-attachments/assets/44a2a49e-3954-4892-a639-2a2e7c57f516" />
+---
+
+## 📊 Dataset
+
+Dataset yang digunakan adalah **TinyImageNet-200**, terdiri dari 200 kelas dengan resolusi gambar 64×64.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e984b1a5-b043-4d63-8047-552a5c3d2f92" width="85%" />
+</p>
+
+---
+
+## 🧠 Metodologi & Pipeline RAG
+
+Pipeline sistem mengikuti alur **Multimodal RAG** sebagai berikut:
+
+1. **Input Query**
+
+   * Query teks (Text-to-Image Search)
+   * Query gambar (Image-to-Image Search)
+2. **Embedding**
+
+   * Query dan gambar dienkode menggunakan **CLIP**
+3. **Retrieval**
+
+   * Pencarian vektor dilakukan menggunakan **FAISS**
+4. **Augmentation**
+
+   * Label dan metadata hasil retrieval dijadikan konteks
+5. **Generation**
+
+   * **Qwen2-VL** menghasilkan deskripsi citra berbasis konteks (RAG)
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/44a2a49e-3954-4892-a639-2a2e7c57f516" width="85%" />
+</p>
 
 ---
 
 ## 👥 Anggota Kelompok
 
-| Nama | NIM |
-| :--- | :--- |
-| **Naza Nadhana Afdha** | 202110370311522 |
-| **Yashinta Indrastuti** | 202110370311502 |
+| Nama                             | NIM             |
+| -------------------------------- | --------------- |
+| **Naza Nadhana Afdha**           | 202110370311522 |
+| **Yashinta Indrastuti**          | 202110370311502 |
 | **Muhammad Yurdan Asy Shadzili** | 202110370311455 |
 
 ---
 
 ## 🚀 Fitur Utama
 
-1.  **Multimodal Retrieval (Pencarian Cerdas)**
-    * Mencari gambar menggunakan query **Teks** ("cari kucing mesir").
-    * Mencari gambar menggunakan query **Gambar** (Image-to-Image Search).
-    * Menggunakan **FAISS** untuk pencarian vektor kecepatan tinggi.
+### 1️⃣ Multimodal Retrieval (Pencarian Cerdas)
 
-2.  **Generative Description (AI Explanation)**
-    * Menggunakan **Qwen2-VL** untuk melihat dan mendeskripsikan gambar hasil pencarian secara detail.
-    * Menerapkan teknik RAG dimana model diberikan konteks label asli untuk meningkatkan akurasi deskripsi.
+* 🔍 Text-to-Image Search (contoh: *"cari kucing mesir"*)
+* 🖼️ Image-to-Image Search
+* ⚡ Menggunakan **FAISS** untuk pencarian vektor skala besar
 
-3.  **Evaluasi**
-    * Modul evaluasi otomatis untuk menghitung metrik: **Recall@1**, **Recall@5**, **MRR** (Mean Reciprocal Rank), dan **LIR** (Label Inclusion Rate).
+### 2️⃣ Generative Description (AI Explanation)
+
+* 🤖 Deskripsi gambar otomatis menggunakan **Qwen2-VL**
+* 🧩 Menggunakan konteks label hasil retrieval (RAG-based)
+* 📄 Output berupa narasi visual yang detail dan kontekstual
+
+### 3️⃣ Evaluasi Sistem
+
+* 📈 Evaluasi otomatis menggunakan metrik:
+
+  * **Recall@1**
+  * **Recall@5**
+  * **MRR (Mean Reciprocal Rank)**
+  * **LIR (Label Inclusion Rate)**
 
 ---
 
 ## 🛠️ Teknologi yang Digunakan
 
-* **Bahasa Pemrograman:** Python 3.10+
-* **Vector Database:** FAISS (Facebook AI Similarity Search)
-* **Embedding Model:** CLIP (Sentence-Transformers)
-* **Generative Model (VLM):** Qwen2-VL-2B-Instruct (Hugging Face)
-* **Framework:** PyTorch, Transformers
-* **Dataset:** TinyImageNet-200
+* **Bahasa Pemrograman** : Python 3.10+
+* **Embedding Model** : CLIP (Sentence-Transformers)
+* **Vector Database** : FAISS
+* **Vision-Language Model** : Qwen2-VL-2B-Instruct
+* **Framework** : PyTorch, Hugging Face Transformers
+* **Dataset** : TinyImageNet-200
+* **Web Interface** : Streamlit
 
 ---
 
-## 📂 Struktur Folder
+## 📂 Struktur Folder Proyek
 
 ```text
 TinyImageNet-RAG-Multimodal-System/
-├── app.py                  # Antarmuka Web (Streamlit/Gradio)
-├── backend.py              # Logika Utama RAG (Load Model & Search)
-├── config.py               # Konfigurasi Path & Parameter
-├── evaluation.py           # Script Pengujian Akurasi (Recall & MRR)
-├── indexer.py              # Script untuk membuat index FAISS dari Dataset
-├── download_data.py        # Script download dataset otomatis
-├── Dataset/                # Folder penyimpanan gambar TinyImageNet
-└── vector_db/              # Folder penyimpanan hasil indexing (FAISS .bin, .json)
+│
+├── app.py                 # Antarmuka Web (Streamlit)
+├── backend.py             # Logika inti RAG (retrieval & generation)
+├── config.py              # Konfigurasi path & parameter model
+├── indexer.py             # Pembuatan index FAISS dari dataset
+├── evaluation.py          # Evaluasi performa (Recall, MRR, LIR)
+├── download_data.py       # Download dataset TinyImageNet otomatis
+├── fix_train.py           # Restrukturisasi data training
+├── fix_val.py             # Restrukturisasi data validasi
+├── check_data.py          # Validasi integritas dataset
+│
+├── Dataset/               # Dataset TinyImageNet
+└── vector_db/             # Penyimpanan FAISS index & metadata
+```
 
+---
 
+## ⚙️ Instalasi Dependensi
 
-pip install torch torchvision transformers sentence-transformers faiss-cpu pillow requests tqdm numpy accelerate qwen-vl-utils streamlit
+```bash
+pip install torch torchvision transformers sentence-transformers \
+            faiss-cpu pillow requests tqdm numpy \
+            accelerate qwen-vl-utils streamlit
+```
 
-Langkah 1: Konfigurasi Sistem
-Memastikan parameter path dan model sudah sesuai.
+---
 
-File: config.py
+## ▶️ Cara Menjalankan Sistem
 
-Tindakan: Periksa file ini untuk memastikan path dataset dan konfigurasi model sudah benar. Tidak perlu dijalankan, hanya diverifikasi.
+### Langkah 1 — Konfigurasi Sistem
 
-Langkah 2: Akuisisi Data
-Mengunduh dataset TinyImageNet-200 dan mengekstraknya ke folder proyek.
+* **File**: `config.py`
+* Pastikan path dataset dan model sudah benar
+* Tidak perlu dijalankan, hanya diverifikasi
 
-Bash
+---
 
+### Langkah 2 — Akuisisi Dataset
+
+Mengunduh dan mengekstrak dataset TinyImageNet-200
+
+```bash
 python download_data.py
-Langkah 3: Restrukturisasi Data Training
-Memperbaiki struktur folder training agar sesuai dengan format standar ImageFolder.
+```
 
-Bash
+---
 
+### Langkah 3 — Restrukturisasi Data Training
+
+Menyesuaikan struktur folder training agar kompatibel dengan `ImageFolder`
+
+```bash
 python fix_train.py
-Langkah 4: Restrukturisasi Data Validasi
-Mengelompokkan gambar validasi (val) ke dalam sub-folder kelas masing-masing (sangat krusial untuk evaluasi akurasi).
+```
 
-Bash
+---
 
+### Langkah 4 — Restrukturisasi Data Validasi
+
+Mengelompokkan data validasi ke dalam folder kelas (krusial untuk evaluasi)
+
+```bash
 python fix_val.py
-Langkah 5: Verifikasi Integritas Data
-Melakukan pengecekan akhir untuk memastikan jumlah gambar dan struktur folder sudah valid sebelum diproses lebih lanjut.
+```
 
-Bash
+---
 
+### Langkah 5 — Verifikasi Integritas Data
+
+Memastikan struktur dan jumlah data sudah valid
+
+```bash
 python check_data.py
-Langkah 6: Inisialisasi Backend
-File: backend.py
+```
 
-Keterangan: File ini berisi logika inti (Class RAGSystem). Pastikan file ini ada di root folder karena akan dipanggil oleh modul lain.
+---
 
-Langkah 7: Indexing (Vektorisasi)
-Mengubah ribuan gambar dataset menjadi vektor embedding menggunakan model CLIP dan menyimpannya ke dalam FAISS Vector Database.
+### Langkah 6 — Inisialisasi Backend
 
-Bash
+* **File**: `backend.py`
+* Berisi class utama `RAGSystem`
+* Digunakan oleh aplikasi dan modul evaluasi
 
+---
+
+### Langkah 7 — Indexing (Vektorisasi Dataset)
+
+Mengonversi seluruh gambar menjadi embedding CLIP dan menyimpannya ke FAISS
+
+```bash
 python indexer.py
-> Output: File vector_db/tiny_imagenet_rag_index.bin akan terbentuk.
+```
 
-Langkah 8: Setup Model LLM
-Mengunduh atau memverifikasi kesiapan model Qwen2-VL (Vision Language Model) agar siap digunakan untuk inferensi.
+**Output:**
 
-Bash
+```text
+vector_db/tiny_imagenet_rag_index.bin
+```
 
+---
+
+### Langkah 8 — Setup Model Vision-Language (LLM)
+
+Menyiapkan model **Qwen2-VL** untuk inferensi
+
+```bash
 python setup_models_LLM.py
-Langkah 9: Menjalankan Aplikasi (Interface)
-Menjalankan antarmuka web berbasis Streamlit untuk demonstrasi pencarian dan deskripsi gambar secara interaktif.
+```
 
-Bash
+---
 
+### Langkah 9 — Menjalankan Aplikasi Web
+
+Menjalankan antarmuka Streamlit untuk demo interaktif
+
+```bash
 streamlit run app.py
-Langkah 10: Evaluasi Akademik
-Menjalankan skrip pengujian otomatis untuk menghitung metrik performa: Recall@1, Recall@5, MRR, dan LIR.
+```
 
-Bash
+---
 
+### Langkah 10 — Evaluasi Akademik
+
+Menghitung performa sistem menggunakan metrik retrieval
+
+```bash
 python evaluation.py
+```
 
+---
+
+## 📌 Catatan
+
+* Sistem dirancang untuk **riset akademik dan pembelajaran multimodal RAG**
+* Dapat dikembangkan untuk dataset skala besar atau domain lain
+* Cocok sebagai dasar pengembangan **Multimodal Search Engine**
+
+---
+
+✨ *TinyImageNet RAG Multimodal System — Bridging Vision & Language with Retrieval-Augmented Intelligence*
