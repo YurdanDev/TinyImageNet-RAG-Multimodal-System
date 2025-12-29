@@ -201,6 +201,9 @@ python indexer.py
 ```text
 vector_db/tiny_imagenet_rag_index.bin
 ```
+```text
+vector_db/tiny_imagenet_rag_metadata.json
+```
 
 ---
 
@@ -243,3 +246,4 @@ python evaluation.py
 ---
 
 ✨ *TinyImageNet RAG Multimodal System — Bridging Vision & Language with Retrieval-Augmented Intelligence*
+
