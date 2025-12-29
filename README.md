@@ -27,7 +27,7 @@ Sistem ini menggabungkan kekuatan **CLIP** untuk pencarian visual (retrieval) da
     * Menggunakan **Qwen2-VL** untuk melihat dan mendeskripsikan gambar hasil pencarian secara detail.
     * Menerapkan teknik RAG dimana model diberikan konteks label asli untuk meningkatkan akurasi deskripsi.
 
-3.  **Evaluasi Akademik**
+3.  **Evaluasi**
     * Modul evaluasi otomatis untuk menghitung metrik: **Recall@1**, **Recall@5**, **MRR** (Mean Reciprocal Rank), dan **LIR** (Label Inclusion Rate).
 
 ---
@@ -47,7 +47,7 @@ Sistem ini menggabungkan kekuatan **CLIP** untuk pencarian visual (retrieval) da
 
 ```text
 TinyImageNet-RAG-Multimodal-System/
-├── app.py                  # Antarmuka Web (Streamlit/Gradio) - *jika ada*
+├── app.py                  # Antarmuka Web (Streamlit/Gradio)
 ├── backend.py              # Logika Utama RAG (Load Model & Search)
 ├── config.py               # Konfigurasi Path & Parameter
 ├── evaluation.py           # Script Pengujian Akurasi (Recall & MRR)
@@ -55,3 +55,8 @@ TinyImageNet-RAG-Multimodal-System/
 ├── download_data.py        # Script download dataset otomatis
 ├── Dataset/                # Folder penyimpanan gambar TinyImageNet
 └── vector_db/              # Folder penyimpanan hasil indexing (FAISS .bin)
+
+
+
+
+
