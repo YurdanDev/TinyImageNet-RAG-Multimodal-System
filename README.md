@@ -16,8 +16,11 @@ Pendekatan RAG memungkinkan model generatif menerima **konteks hasil retrieval**
 
 Dataset yang digunakan adalah **TinyImageNet-200**, terdiri dari 200 kelas dengan resolusi gambar 64×64.
 
+🔗 **Sumber Dataset (Kaggle):**
+[https://www.kaggle.com/datasets/akash2sharma/tiny-imagenet](https://www.kaggle.com/datasets/akash2sharma/tiny-imagenet)
+
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/e984b1a5-b043-4d63-8047-552a5c3d2f92" width="85%" />
+  <img src="https://github.com/user-attachments/assets/44a2a49e-3954-4892-a639-2a2e7c57f516" width="85%" />
 </p>
 
 ---
@@ -44,7 +47,7 @@ Pipeline sistem mengikuti alur **Multimodal RAG** sebagai berikut:
    * **Qwen2-VL** menghasilkan deskripsi citra berbasis konteks (RAG)
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/44a2a49e-3954-4892-a639-2a2e7c57f516" width="85%" />
+  <img src="https://github.com/user-attachments/assets/e984b1a5-b043-4d63-8047-552a5c3d2f92" width="85%" />
 </p>
 
 ---
