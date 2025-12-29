@@ -227,7 +227,7 @@ streamlit run app.py
 
 ---
 
-### Langkah 10 — Evaluasi Akademik
+### Langkah 10 — Evaluasi
 
 Menghitung performa sistem menggunakan metrik retrieval
 
@@ -239,11 +239,12 @@ python evaluation.py
 
 ## 📌 Catatan
 
-* Sistem dirancang untuk **riset akademik dan pembelajaran multimodal RAG**
+* Sistem dirancang untuk **Final Project Temu Kembali Citra dan pembelajaran multimodal RAG**
 * Dapat dikembangkan untuk dataset skala besar atau domain lain
 * Cocok sebagai dasar pengembangan **Multimodal Search Engine**
 
 ---
 
 ✨ *TinyImageNet RAG Multimodal System — Bridging Vision & Language with Retrieval-Augmented Intelligence*
+
 
