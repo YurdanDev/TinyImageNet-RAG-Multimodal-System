@@ -1,0 +1,35 @@
+# --- 1. PyCharm & IDE Settings  ---
+.idea/
+*.iml
+.vscode/
+
+# --- 2. Python System Files  ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- 3. Virtual Environment ---
+venv/
+env/
+.env
+
+# --- 4. FOLDER BESAR YANG TIDAK DI-UPLOAD ---
+
+# Ignore Model Cache (Clip & Qwen sangat besar)
+models_cache/
+
+# Ignore Vector Database (Hasil embedding)
+vector_db/
+
+# --- 5. Ekstensi File Berat Lainnya (Safety Net) ---
+*.pt
+*.pth
+*.bin
+*.onnx
+*.safetensors
+*.h5
+*.ckpt
+
+# --- 6. Log & File  ---
+*.log
+*.DS_Store
